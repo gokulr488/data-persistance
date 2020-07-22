@@ -1,12 +1,15 @@
 package com.algols.datapersistance.dos;
 
 import java.sql.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -48,7 +51,8 @@ public class TSubEventDo {
 	@Column(name = "REF_NO")
 	private String refNo;
 
-	// private List<SubDtlListDo> subDtlListDos;
+	@OneToMany(mappedBy = "tSubEventDo", cascade = CascadeType.ALL)
+	private List<EvnAtrListDo> evnAtrListDos;
 
 	public String getEventType() {
 		return eventType;
@@ -127,6 +131,14 @@ public class TSubEventDo {
 		return "TSubEventDo [eventSeq=" + eventSeq + ", eventType=" + eventType + ", busEventType=" + busEventType
 				+ ", requestSeq=" + requestSeq + ", eventDate=" + eventDate + ", icapId=" + icapId + ", customerId="
 				+ customerId + ", icapEventSeq=" + icapEventSeq + ", refNo=" + refNo + "]";
+	}
+
+	public List<EvnAtrListDo> getEvnAtrListDos() {
+		return evnAtrListDos;
+	}
+
+	public void setEvnAtrListDos(List<EvnAtrListDo> evnAtrListDos) {
+		this.evnAtrListDos = evnAtrListDos;
 	}
 
 }
